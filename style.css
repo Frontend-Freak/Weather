@@ -122,3 +122,22 @@ body {
 .added{
     color: red;
 }
+
+@media (max-width: 450px) {
+    .app__window {
+        margin: 15vh auto;
+    }
+    .app__window-bottom{
+        flex-wrap: wrap;
+    }
+    .app__window-bottom__left{
+        max-width: 621px;
+        width: 100%;
+    }
+    .app__window-bottom__right{
+        max-width: 621px;
+        width: 100%;
+        border-left: solid 1px black;
+        min-height: 150px;
+    }
+}
