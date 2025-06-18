@@ -125,7 +125,7 @@ body {
 
 @media (max-width: 450px) {
     .app__window {
-        margin: 15vh auto;
+        margin: 2vh auto;
     }
     .app__window-bottom{
         flex-wrap: wrap;
