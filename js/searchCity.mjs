@@ -8,7 +8,7 @@ const weatherIcon = document.getElementById('weatherIcon')
 const weatherStatus = document.getElementById("weatherStatus");
 
 export function searchCity() {
-    const serverUrl = "http://api.openweathermap.org/data/2.5/weather";
+    const serverUrl = "https://api.openweathermap.org/data/2.5/weather";
     const cityName = cityInput.value;
     const apiKey = "f660a2fb1e4bad108d6160b7f58c555f";
     const url = `${serverUrl}?q=${cityName}&appid=${apiKey}`;
