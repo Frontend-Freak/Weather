@@ -1,0 +1,124 @@
+body {
+	background: #2b3c5d;
+	color: black;
+	font-family: Arial, Helvetica, sans-serif;
+	display: flex;
+}
+
+.app__window {
+	margin: 25vh auto;
+	max-width: 621px;
+	width: 100%;
+    min-height: 383px;
+	background: white;
+    padding: 14px;
+}
+
+#searchString{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: solid 1px black;
+    height: 45px;
+    padding: 7px 17px;
+}
+
+#cityInput{
+    font-size: 20px;
+    border: none;
+}
+
+#searchButton{
+    font-size: 20px;
+    height: 40px;
+    background: inherit;
+    border: none;
+}
+
+.app__window-bottom{
+    display: flex;
+    justify-content: space-between;
+}
+
+.app__window-bottom__left{
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    min-width: 298px;
+    min-height: 314px;
+    justify-content: space-between;
+    border: solid 1px black;
+    border-top: none;
+}
+
+#temperature{
+    font-size: 60px;
+    text-align: left;
+}
+
+#weatherIcon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -30px;
+}
+
+#weatherIcon img{
+    max-width: 150px;
+    width: 100%;
+    max-height: 150px;
+    height: 100%;
+}
+
+#weatherStatus{
+    font-size: 20px;
+    text-align: center;
+    margin-top: -50px;
+}
+
+.city{
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#addToFavoritesBtn{
+    font-size: 25px;
+    background: inherit;
+    border: none;
+}
+
+.app__window-bottom__right{
+    display: flex;
+    flex-direction: column;
+    max-width: 302px;
+    width: 100%;
+    min-height: 314px;
+    border: solid 1px black;
+    border-top: none;
+    border-left: none;
+}
+
+.app__window-bottom__right h2{
+    display: inline-block;
+    font-size: 25px;
+    font-weight: 300;
+    text-align: left;
+    padding-left: 16px;
+}
+
+.added__locations{
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    font-size: 25px;
+    gap: 15px;
+    border-top: solid 1px black;
+
+    padding:  16px;
+}
+
+.added{
+    color: red;
+}
