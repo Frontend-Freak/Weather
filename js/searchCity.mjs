@@ -5,7 +5,7 @@ export const temperature = document.getElementById("temperature");
 export const foundCity = document.getElementById("foundCity");
 const weatherIcon = document.getElementById("weatherIcon");
 export const weatherStatus = document.getElementById("weatherStatus");
-export const serverUrl = "http://api.openweathermap.org/data/2.5/weather";
+export const serverUrl = "https://api.openweathermap.org/data/2.5/weather";
 export const apiKey = "f660a2fb1e4bad108d6160b7f58c555f";
 
 export function searchCity() {
