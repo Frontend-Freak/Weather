@@ -6,7 +6,7 @@ body {
 }
 
 .app__window {
-	margin: 25vh auto;
+	margin: 5vh auto;
 	max-width: 621px;
 	width: 100%;
 	min-height: 383px;
@@ -81,6 +81,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	margin-bottom: 10px;
 }
 
 #addToFavoritesBtn {
@@ -140,6 +141,38 @@ body {
 	border: none;
 	font-size: 30px;
 	padding-bottom: 10px;
+}
+
+.desc__weather {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	justify-content: center;
+	gap: 10px;
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+
+.future__weather-time {
+	position: relative;
+	margin-bottom: 10px;
+}
+
+.future__weather-time::after {
+	position: absolute;
+	content: '';
+	border: 1px solid black;
+	max-width: 300px;
+	width: 100%;
+	top: -10px;
+	left: 0px;
+}
+
+.future__weather {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	margin-bottom: 20px;
 }
 
 @media (max-width: 450px) {

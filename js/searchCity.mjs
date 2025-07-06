@@ -1,16 +1,22 @@
-import { showWeatherIcon } from "./showIcon.mjs";
+import { futureTempFetch } from "./futureWeather.mjs";
+import { renderMainTemp } from "./renderUI.mjs";
 
 export const cityInput = document.getElementById("cityInput");
 export const temperature = document.getElementById("temperature");
 export const foundCity = document.getElementById("foundCity");
 const weatherIcon = document.getElementById("weatherIcon");
-export const weatherStatus = document.getElementById("weatherStatus");
 export const serverUrl = "https://api.openweathermap.org/data/2.5/weather";
 export const apiKey = "f660a2fb1e4bad108d6160b7f58c555f";
+export const addToFavoritesBtn = document.getElementById("addToFavoritesBtn");
+export const feelsLike = document.getElementById("feelsLike");
+export const sunrise = document.getElementById("sunrise");
+export const sunset = document.getElementById("sunset");
+export const futureWeather = document.getElementById('futureWeather')
+
 
 export function searchCity() {
 	const cityName = cityInput.value;
-	const url = `${serverUrl}?q=${cityName}&appid=${apiKey}`;
+	const url = `${serverUrl}?q=${cityName}&appid=${apiKey}&units=metric`;
 
 	fetch(url)
 		.then((response) => {
@@ -20,13 +26,8 @@ export function searchCity() {
 			return response.json();
 		})
 		.then((data) => {
-			const kelvinTemperature = data.main.temp;
-			const celsiusTemperature = kelvinTemperature - 273.15;
-			temperature.textContent = Math.floor(celsiusTemperature) + "°C";
-			foundCity.textContent = data.name;
-			weatherStatus.textContent = data.weather[0].description;
-			weatherIcon.innerHTML = "";
-			showWeatherIcon(data.weather[0].icon);
+			renderMainTemp(data)
+			futureTempFetch();
 		})
 		.catch((error) => console.error(error));
 }

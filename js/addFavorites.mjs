@@ -1,22 +1,18 @@
-export const addFavoritesBtn = document.getElementById("addToFavoritesBtn");
 import { renderFavorite } from "./renderUI.mjs";
 import { serverUrl } from "./searchCity.mjs";
 import { apiKey } from "./searchCity.mjs";
 import { foundCity } from "./searchCity.mjs";
-import { temperature } from "./searchCity.mjs";
-import { weatherStatus } from "./searchCity.mjs";
+export const addFavoritesBtn = document.getElementById("addToFavoritesBtn");
 
 export const savedCity = [];
 
-function saveCity(city, temp, desc) {
+function saveCity(city, lat, lon) {
 	const weatherObject = {
 		city: city,
-		temperature: temp,
-		description: desc,
+		lat: lat,
+		lon: lon,
 	};
-
 	savedCity.push(weatherObject);
-	console.log(savedCity);
 }
 
 export function addFavorites() {
@@ -32,18 +28,9 @@ export function addFavorites() {
 			return response.json();
 		})
 		.then((data) => {
-			const kelvinTemperature = data.main.temp;
-			const celsiusTemperature = kelvinTemperature - 273.15;
-			temperature.textContent = Math.floor(celsiusTemperature) + "°C";
 			foundCity.textContent = data.name;
-			weatherStatus.textContent = data.weather[0].description;
-
-			saveCity(
-				foundCity.textContent,
-				temperature.textContent,
-				weatherStatus.textContent
-			);
+			saveCity(foundCity.textContent, data.coord.lat, data.coord.lon);
 			renderFavorite();
 		})
-		.catch((error) => console.error(error))
+		.catch((error) => console.error(error));
 }

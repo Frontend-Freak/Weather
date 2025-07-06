@@ -5,7 +5,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Weather</title>
 		<link rel="stylesheet" href="./style.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	</head>
 	<body>
         <div class="app__window">
@@ -14,16 +13,24 @@
                 <button id="searchButton" type="submit">🔍</button>
             </form>
             <div class="app__window-bottom">
-                <div class="app__window-bottom__left">
-                    <div id="temperature"></div>
-                    <div id="weatherIcon">
-                    </div>
-                    <div id="weatherStatus"></div>
-                    <div class="city">
+                <div class="app__window-bottom__left" id="appWindowBottomLeft">
+                    <div class="city" id="city">
                         <span id="foundCity"></span>
-                        <button id="addToFavoritesBtn">♡</button>
+                        <button id="addToFavoritesBtn"></button>
+                    </div>
+
+                    <div id="temperature"></div>
+                    <div id="weatherIcon"></div>
+                    <div class="desc__weather">
+                        <div class="feels__like" id="feelsLike"></div>
+                        <div class="sunrise" id="sunrise"></div>
+                        <div class="sanset" id="sunset"></div>
+                    </div>
+                    <div class="future__weather" id="futureWeather">
+                        
                     </div>
                 </div>
+
                 <div class="app__window-bottom__right">
                     <h2>Добавленные места:</h2>
                     <div id="addedLocations" class="added__locations">
@@ -33,5 +40,5 @@
             </div>
         </div>
     </body>
-	<script type="module" src="./js/main.mjs" defer></script>
+	<script type="module" src="./js/main.mjs"></script>
 </html>
