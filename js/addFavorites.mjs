@@ -2,6 +2,7 @@ import { renderFavorite } from "./renderUI.mjs";
 import { serverUrl } from "./searchCity.mjs";
 import { apiKey } from "./searchCity.mjs";
 import { foundCity } from "./searchCity.mjs";
+//import { loadFavoriteCities } from "./saveInLocalStorage.mjs";
 export const addFavoritesBtn = document.getElementById("addToFavoritesBtn");
 
 export const savedCity = [];
@@ -13,6 +14,7 @@ function saveCity(city, lat, lon) {
 		lon: lon,
 	};
 	savedCity.push(weatherObject);
+	localStorage.setItem('favoriteCities', JSON.stringify(savedCity));
 }
 
 export function addFavorites() {
@@ -31,6 +33,23 @@ export function addFavorites() {
 			foundCity.textContent = data.name;
 			saveCity(foundCity.textContent, data.coord.lat, data.coord.lon);
 			renderFavorite();
+			console.log(savedCity)
+
+			
+
 		})
 		.catch((error) => console.error(error));
 }
+
+
+function loadFavoriteCities() {
+	const savedCities = JSON.parse(localStorage.getItem('favoriteCities'));
+	if (savedCities) {
+		savedCity.push(...savedCities);
+	}
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadFavoriteCities();
+    renderFavorite();
+});
