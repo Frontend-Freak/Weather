@@ -9,6 +9,7 @@ import { coordCity } from "./futureWeather.mjs";
 import { feelsLike } from "./searchCity.mjs";
 import { sunrise } from "./searchCity.mjs";
 import { sunset } from "./searchCity.mjs";
+import { getFromLocalStorage } from "./local.mjs";
 const addedLocations = document.getElementById("addedLocations");
 
 
@@ -87,6 +88,8 @@ export function renderFavorite() {
 			console.log(savedCity);
 		});
 
+
+		
 		favoriteCity.addEventListener("click", () => {
 			const cityName = favoriteCity.textContent;
 			const url = `${serverUrl}?q=${cityName}&appid=${apiKey}&units=metric`;
@@ -106,6 +109,7 @@ export function renderFavorite() {
 					sunset.textContent = `Закат: ${convertUnixToNormalTime(data.sys.sunset)}`;
 					weatherIcon.innerHTML = "";
 					showWeatherIcon(data.weather[0].icon);
+					
 
 					let futureArray = []
 					const serverUrl = "https://api.openweathermap.org/data/2.5/forecast";

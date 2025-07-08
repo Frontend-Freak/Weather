@@ -3,6 +3,12 @@ import { addFavoritesBtn } from "./addFavorites.mjs";
 import { addFavorites } from "./addFavorites.mjs";
 import { renderFavorite } from "./renderUI.mjs";
 import { cityInput } from "./searchCity.mjs";
+import { saveToLocalStorage } from "./local.mjs";
+import { getFromLocalStorage } from "./local.mjs";
+
+getFromLocalStorage()
+renderFavorite()
+
 
 const searchForm = document.getElementById("searchString");
 
