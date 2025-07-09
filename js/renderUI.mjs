@@ -10,6 +10,7 @@ import { feelsLike } from "./searchCity.mjs";
 import { sunrise } from "./searchCity.mjs";
 import { sunset } from "./searchCity.mjs";
 import { getFromLocalStorage } from "./local.mjs";
+import { saveToLocalStorage } from "./local.mjs";
 const addedLocations = document.getElementById("addedLocations");
 
 
@@ -85,7 +86,7 @@ export function renderFavorite() {
 		deleteButton.addEventListener("click", () => {
 			savedCity.splice(index, 1);
 			renderFavorite();
-			console.log(savedCity);
+			saveToLocalStorage();
 		});
 
 
