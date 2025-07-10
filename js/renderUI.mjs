@@ -9,12 +9,7 @@ import { coordCity } from "./futureWeather.mjs";
 import { feelsLike } from "./searchCity.mjs";
 import { sunrise } from "./searchCity.mjs";
 import { sunset } from "./searchCity.mjs";
-<<<<<<< HEAD
 import { saveToLocalStorageFavorite } from "./local.mjs";
-=======
-import { getFromLocalStorage } from "./local.mjs";
-import { saveToLocalStorage } from "./local.mjs";
->>>>>>> 91d8fe813156a65f8ee8a5ce7a19afd03ef57a4d
 const addedLocations = document.getElementById("addedLocations");
 
 
@@ -85,11 +80,7 @@ export function renderFavorite() {
 		deleteButton.addEventListener("click", () => {
 			savedCity.splice(index, 1);
 			renderFavorite();
-<<<<<<< HEAD
 			saveToLocalStorageFavorite();
-=======
-			saveToLocalStorage();
->>>>>>> 91d8fe813156a65f8ee8a5ce7a19afd03ef57a4d
 		});
 
 

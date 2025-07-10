@@ -5,7 +5,6 @@ import { renderFavorite } from "./renderUI.mjs";
 import { cityInput } from "./searchCity.mjs";
 import { getFromLocalStorageFavorite} from "./local.mjs";
 import { saveToLocalStorageCurrent } from "./local.mjs";
-import { getFromLocalStorageCurrent } from "./local.mjs";
 const searchForm = document.getElementById("searchString");
 
 
