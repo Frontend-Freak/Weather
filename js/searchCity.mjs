@@ -1,5 +1,6 @@
 import { futureTempFetch } from "./futureWeather.mjs";
 import { renderMainTemp } from "./renderUI.mjs";
+import { getFromLocalStorageCurrent } from "./local.mjs";
 
 export const cityInput = document.getElementById("cityInput");
 export const temperature = document.getElementById("temperature");
@@ -12,11 +13,10 @@ export const sunrise = document.getElementById("sunrise");
 export const sunset = document.getElementById("sunset");
 export const futureWeather = document.getElementById('futureWeather')
 
-
 export function searchCity() {
 	const cityName = cityInput.value;
-	const url = `${serverUrl}?q=${cityName}&appid=${apiKey}&units=metric`;
-
+	const citySavedName = getFromLocalStorageCurrent()
+	const url = `${serverUrl}?q=${citySavedName || cityName}&appid=${apiKey}&units=metric`;
 	fetch(url)
 		.then((response) => {
 			if (response.status === 404) {
@@ -27,7 +27,6 @@ export function searchCity() {
 		.then((data) => {
 			renderMainTemp(data);
 			futureTempFetch();
-
 		})
 		.catch((error) => console.error(error));
 }

@@ -1,19 +1,31 @@
-import { savedCity } from "./addFavorites.mjs";
-import { renderFavorite } from "./renderUI.mjs";
 import { saveCity } from "./addFavorites.mjs";
+import { savedCity } from "./addFavorites.mjs";
+import { cityInput } from "./searchCity.mjs";
 
-export function saveToLocalStorage() {
+export function saveToLocalStorageFavorite() {
 	localStorage.setItem("savedCity", JSON.stringify(savedCity));
-	console.log(savedCity);
 }
 
-export function getFromLocalStorage() {
-	const savedCities = localStorage.getItem("savedCity");
-
-	if (savedCities) {
-        const savedCities111 = JSON.parse(savedCities)
-        savedCities111.forEach(element => {
+export function getFromLocalStorageFavorite() {
+	const savedFavoriteCities = localStorage.getItem("savedCity");
+	if (savedFavoriteCities) {
+        const savedCities = JSON.parse(savedFavoriteCities)
+        savedCities.forEach(element => {
             saveCity(element.city, element.lat, element.lon)
         })
 	}
+}
+
+export function saveToLocalStorageCurrent(){
+    const foundCity = cityInput.value
+    localStorage.setItem('lastFoundedCity', foundCity)
+}
+
+export function getFromLocalStorageCurrent(){
+    const savedCurrentCity = localStorage.getItem('lastFoundedCity')
+    if(savedCurrentCity){
+        return savedCurrentCity
+    } else {
+        return ''
+    }
 }

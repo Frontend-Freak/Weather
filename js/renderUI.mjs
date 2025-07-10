@@ -9,7 +9,7 @@ import { coordCity } from "./futureWeather.mjs";
 import { feelsLike } from "./searchCity.mjs";
 import { sunrise } from "./searchCity.mjs";
 import { sunset } from "./searchCity.mjs";
-import { getFromLocalStorage } from "./local.mjs";
+import { saveToLocalStorageFavorite } from "./local.mjs";
 const addedLocations = document.getElementById("addedLocations");
 
 
@@ -18,10 +18,8 @@ export function renderMainTemp(data) {
 	temperature.textContent = Math.floor(data.main.temp) + "°C";
 	foundCity.textContent = data.name;
 	weatherIcon.innerHTML = "";
-	feelsLike.textContent =
-		"Ощущается как: " + Math.floor(data.main.feels_like) + "°C";
-	sunrise.textContent =
-		"Восход: " + convertUnixToNormalTime(data.sys.sunrise);
+	feelsLike.textContent = "Ощущается как: " + Math.floor(data.main.feels_like) + "°C";
+	sunrise.textContent = "Восход: " + convertUnixToNormalTime(data.sys.sunrise);
 	sunset.textContent = "Закат: " + convertUnixToNormalTime(data.sys.sunset);
 	showWeatherIcon(data.weather[0].icon);
 
@@ -46,12 +44,9 @@ export function renderFutureTemp(futureArray) {
 		futureTemp.className = "future__temperature";
 		futureFeelsLike.className = "future__feels__like";
 
-		futureWeatherTime.textContent = convertUnixToNormalTime(
-			futureWeatherData.dt
-		);
+		futureWeatherTime.textContent = convertUnixToNormalTime(futureWeatherData.dt);
 		futureTemp.textContent = Math.floor(futureWeatherData.main.temp) + "°C";
-		futureFeelsLike.textContent =
-			Math.floor(futureWeatherData.main.feels_like) + "°C";
+		futureFeelsLike.textContent = Math.floor(futureWeatherData.main.feels_like) + "°C";
 
 		futureWeather.appendChild(futureWeatherItem);
 		futureWeatherItem.appendChild(futureWeatherTime);
@@ -85,7 +80,7 @@ export function renderFavorite() {
 		deleteButton.addEventListener("click", () => {
 			savedCity.splice(index, 1);
 			renderFavorite();
-			console.log(savedCity);
+			saveToLocalStorageFavorite();
 		});
 
 
@@ -93,10 +88,9 @@ export function renderFavorite() {
 		favoriteCity.addEventListener("click", () => {
 			const cityName = favoriteCity.textContent;
 			const url = `${serverUrl}?q=${cityName}&appid=${apiKey}&units=metric`;
-
 			fetch(url)
 				.then((response) => {
-					if (response.status === 404) {
+					if (!response.ok) {
 						throw new Error("Запись не найдена");
 					}
 					return response.json();
@@ -118,7 +112,7 @@ export function renderFavorite() {
 					const url = `${serverUrl}?lat=${cityLat}&lon=${cityLon}&appid=${apiKey}&units=metric`;
 					fetch(url)
 						.then((response) => {
-							if (response.status === 404) {
+							if (!response.ok) {
 								throw new Error("Запись не найдена");
 							}
 						return response.json();

@@ -15,7 +15,7 @@ export function futureTempFetch() {
     const url = `${serverUrl}?lat=${cityLat}&lon=${cityLon}&appid=${apiKey}&units=metric`;
     fetch(url)
         .then((response) => {
-            if (response.status === 404) {
+            if (!response.ok) {
                 throw new Error("Запись не найдена");
             }
             return response.json();

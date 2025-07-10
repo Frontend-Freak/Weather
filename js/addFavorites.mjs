@@ -2,8 +2,7 @@ import { renderFavorite } from "./renderUI.mjs";
 import { serverUrl } from "./searchCity.mjs";
 import { apiKey } from "./searchCity.mjs";
 import { foundCity } from "./searchCity.mjs";
-import { saveToLocalStorage } from "./local.mjs";
-import { getFromLocalStorage } from "./local.mjs";
+import { saveToLocalStorageFavorite } from "./local.mjs";
 export const addFavoritesBtn = document.getElementById("addToFavoritesBtn");
 
 export const savedCity = [];
@@ -33,7 +32,7 @@ export function addFavorites() {
 			foundCity.textContent = data.name;
 			saveCity(foundCity.textContent, data.coord.lat, data.coord.lon);
 			renderFavorite();
-			saveToLocalStorage();
+			saveToLocalStorageFavorite();
 		})
 		.catch((error) => console.error(error));
 }
