@@ -25,7 +25,6 @@ export function searchCity() {
 			return response.json();
 		})
 		.then((data) => {
-			console.log(data)
 			renderMainTemp(data);
 			futureTempFetch();
 		})

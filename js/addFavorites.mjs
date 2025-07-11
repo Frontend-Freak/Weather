@@ -34,6 +34,8 @@ export function addFavorites() {
 			saveCity(foundCity.textContent);
 			renderFavorite();
 			saveToLocalStorageFavorite();
+			console.log(savedCity)
+
 		})
 		.catch((error) => console.error(error));
 }

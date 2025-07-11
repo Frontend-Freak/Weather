@@ -8,7 +8,7 @@ import { saveToLocalStorageCurrent } from "./local.mjs";
 const searchForm = document.getElementById("searchString");
 
 
-if(cityInput.value === ''){
+if(!cityInput.value){
 	searchCity()
 }
 
@@ -17,8 +17,10 @@ renderFavorite()
 
 searchForm.addEventListener("submit", (event) => {
 	event.preventDefault();
-	saveToLocalStorageCurrent()
+
+	saveToLocalStorageCurrent();
 	searchCity();
+	
 	cityInput.value = "";
 });
 

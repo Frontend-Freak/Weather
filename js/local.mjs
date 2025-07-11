@@ -17,7 +17,7 @@ export function getFromLocalStorageFavorite() {
 }
 
 export function saveToLocalStorageCurrent(){
-    const foundCity = cityInput.value
+    const foundCity = cityInput.value;
     localStorage.setItem('lastFoundedCity', foundCity)
 }
 
