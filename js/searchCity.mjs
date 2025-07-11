@@ -13,20 +13,19 @@ export const sunrise = document.getElementById("sunrise");
 export const sunset = document.getElementById("sunset");
 export const futureWeather = document.getElementById('futureWeather')
 
-export function searchCity() {
+export async function searchCity() {
 	const cityName = cityInput.value;
 	const citySavedName = getFromLocalStorageCurrent()
 	const url = `${serverUrl}?q=${citySavedName || cityName}&appid=${apiKey}&units=metric`;
-	fetch(url)
-		.then((response) => {
-			if (response.status === 404) {
-				throw new Error("Запись не найдена");
-			}
-			return response.json();
-		})
-		.then((data) => {
-			renderMainTemp(data);
-			futureTempFetch();
-		})
-		.catch((error) => console.error(error));
+	try{
+		const response = await fetch(url)
+		if(!response){
+			return 'Страница не найдена'
+		}
+		const data = await response.json()
+		renderMainTemp(data);
+		futureTempFetch();
+	} catch(error){
+		console.error(error)
+	}
 }

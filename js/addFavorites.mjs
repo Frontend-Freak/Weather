@@ -16,26 +16,24 @@ export function saveCity(city) {
 }
 
 
-
-export function addFavorites() {
+export async function addFavorites() {
 	serverUrl;
 	apiKey;
 	const cityName = foundCity.textContent;
 	const url = `${serverUrl}?q=${cityName}&appid=${apiKey}`;
-	fetch(url)
-		.then((response) => {
-			if (!response.ok) {
-				throw new Error("Запись не найдена");
-			}
-			return response.json();
-		})
-		.then((data) => {
-			foundCity.textContent = data.name;
-			saveCity(foundCity.textContent);
-			renderFavorite();
-			saveToLocalStorageFavorite();
-			console.log(savedCity)
-
-		})
-		.catch((error) => console.error(error));
+	
+	try{
+		const response = await fetch(url)
+		if(!response.ok){
+			return 'Страница не найдена'
+		}
+		const data = await response.json()
+		foundCity.textContent = data.name;
+		saveCity(foundCity.textContent);
+		renderFavorite();
+		saveToLocalStorageFavorite();			
+		console.log(savedCity)
+	} catch(error){
+		console.error(error)
+	}
 }

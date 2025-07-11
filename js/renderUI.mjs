@@ -1,5 +1,4 @@
 import { savedCity } from "./addFavorites.mjs";
-import { serverUrl } from "./searchCity.mjs";
 import { apiKey } from "./searchCity.mjs";
 import { showWeatherIcon } from "./showIcon.mjs";
 import { foundCity } from "./searchCity.mjs";
@@ -11,7 +10,6 @@ import { sunset } from "./searchCity.mjs";
 import { saveToLocalStorageFavorite } from "./local.mjs";
 
 const addedLocations = document.getElementById("addedLocations");
-
 
 export function renderMainTemp(data) {
 	addToFavoritesBtn.textContent = "♡";
@@ -75,7 +73,6 @@ export function renderFavorite() {
 		addedLocations.appendChild(favoriteWeather);
 
 		deleteButton.addEventListener("click", () => {
-			const cityName = favoriteCity.textContent;
 			savedCity.splice(index, 1);
 			renderFavorite();
 			saveToLocalStorageFavorite();
@@ -83,41 +80,39 @@ export function renderFavorite() {
 
 
 		
-		favoriteCity.addEventListener("click", () => {
+		favoriteCity.addEventListener("click", async () => {
+			const serverUrlCurrent = "https://api.openweathermap.org/data/2.5/weather";
+			const serverUrlForecast = "https://api.openweathermap.org/data/2.5/forecast";
 			const cityName = favoriteCity.textContent;
-			const url = `${serverUrl}?q=${cityName}&appid=${apiKey}&units=metric`;
-			fetch(url)
-				.then((response) => {
-					if (!response.ok) {
-						throw new Error("Запись не найдена");
-					}
-					return response.json();
-				})
-				.then((data) => {
-					foundCity.textContent = data.name;
-					temperature.textContent = Math.floor(data.main.temp) + "°C";
-					feelsLike.textContent = `Ощущается как: ${Math.floor(data.main.feels_like)}°C`;
-					sunrise.textContent = `Восход: ${convertUnixToNormalTime(data.sys.sunrise)}`;
-					sunset.textContent = `Закат: ${convertUnixToNormalTime(data.sys.sunset)}`;
-					weatherIcon.innerHTML = "";
-					showWeatherIcon(data.weather[0].icon);
-					
+			const urlCurrentWeather = `${serverUrlCurrent}?q=${cityName}&appid=${apiKey}&units=metric`;
+			const urlForecastWeather = `${serverUrlForecast}?q=${cityName}&appid=${apiKey}&units=metric`;
 
-					let futureArray = []
-					const serverUrl = "https://api.openweathermap.org/data/2.5/forecast";
-					const url = `${serverUrl}?q=${cityName}&appid=${apiKey}&units=metric`;
-					fetch(url)
-						.then((response) => {
-							if (!response.ok) {
-								throw new Error("Запись не найдена");
-							}
-						return response.json();
-						})
-						.then((data) => {
-							futureArray = data.list.slice(1, 4);
-            				renderFutureTemp(futureArray);
-						});
+			try{
+				const responseCurrentWeather = await fetch(urlCurrentWeather);
+				const responseForecastWeather = await fetch(urlForecastWeather);
+
+
+				if(!responseCurrentWeather.ok || !responseForecastWeather.ok){
+					return 'Запись не найдена'
+				}
+				const dataCurrentWeather = await responseCurrentWeather.json();
+				const dataForecastWeather = await responseForecastWeather.json();
+
+				foundCity.textContent = dataCurrentWeather.name;
+				temperature.textContent = Math.floor(dataCurrentWeather.main.temp) + "°C";
+				feelsLike.textContent = `Ощущается как: ${Math.floor(dataCurrentWeather.main.feels_like)}°C`;
+				sunrise.textContent = `Восход: ${convertUnixToNormalTime(dataCurrentWeather.sys.sunrise)}`;
+				sunset.textContent = `Закат: ${convertUnixToNormalTime(dataCurrentWeather.sys.sunset)}`;
+				weatherIcon.innerHTML = "";
+				showWeatherIcon(dataCurrentWeather.weather[0].icon);
+
+				let futureArray = []
+
+				futureArray = dataForecastWeather.list.slice(1, 4);
+				renderFutureTemp(futureArray);
+			} catch(error){
+				console.error(error)
+			}
 				});
 		});
-	});
-}
+	};
