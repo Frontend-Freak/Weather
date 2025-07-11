@@ -7,14 +7,15 @@ export const addFavoritesBtn = document.getElementById("addToFavoritesBtn");
 
 export const savedCity = [];
 
-export function saveCity(city, lat, lon) {
+
+export function saveCity(city) {
 	const weatherObject = {
 		city: city,
-		lat: lat,
-		lon: lon,
 	};
 	savedCity.push(weatherObject);
 }
+
+
 
 export function addFavorites() {
 	serverUrl;
@@ -23,14 +24,14 @@ export function addFavorites() {
 	const url = `${serverUrl}?q=${cityName}&appid=${apiKey}`;
 	fetch(url)
 		.then((response) => {
-			if (response.status === 404) {
+			if (!response.ok) {
 				throw new Error("Запись не найдена");
 			}
 			return response.json();
 		})
 		.then((data) => {
 			foundCity.textContent = data.name;
-			saveCity(foundCity.textContent, data.coord.lat, data.coord.lon);
+			saveCity(foundCity.textContent);
 			renderFavorite();
 			saveToLocalStorageFavorite();
 		})

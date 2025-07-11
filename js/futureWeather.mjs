@@ -1,18 +1,13 @@
 import { renderFutureTemp } from "./renderUI.mjs";
 import { apiKey } from "./searchCity.mjs";
-
-export const coordCity = {
-	lat: "",
-	lon: "",
-};
+import { foundCity } from "./searchCity.mjs";
 
 export let futureArray = [];
 
 export function futureTempFetch() {
     const serverUrl = "https://api.openweathermap.org/data/2.5/forecast";
-    const cityLat = coordCity.lat;
-    const cityLon = coordCity.lon;
-    const url = `${serverUrl}?lat=${cityLat}&lon=${cityLon}&appid=${apiKey}&units=metric`;
+    const cityName = foundCity.textContent;
+    const url = `${serverUrl}?q=${cityName}&appid=${apiKey}&units=metric`;
     fetch(url)
         .then((response) => {
             if (!response.ok) {

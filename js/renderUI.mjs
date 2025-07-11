@@ -5,11 +5,11 @@ import { showWeatherIcon } from "./showIcon.mjs";
 import { foundCity } from "./searchCity.mjs";
 import { futureWeather } from "./searchCity.mjs";
 import { convertUnixToNormalTime } from "./utils.mjs";
-import { coordCity } from "./futureWeather.mjs";
 import { feelsLike } from "./searchCity.mjs";
 import { sunrise } from "./searchCity.mjs";
 import { sunset } from "./searchCity.mjs";
 import { saveToLocalStorageFavorite } from "./local.mjs";
+
 const addedLocations = document.getElementById("addedLocations");
 
 
@@ -22,9 +22,6 @@ export function renderMainTemp(data) {
 	sunrise.textContent = "Восход: " + convertUnixToNormalTime(data.sys.sunrise);
 	sunset.textContent = "Закат: " + convertUnixToNormalTime(data.sys.sunset);
 	showWeatherIcon(data.weather[0].icon);
-
-	coordCity.lat = data.coord.lat;
-	coordCity.lon = data.coord.lon;
 }
 
 
@@ -60,7 +57,7 @@ export function renderFutureTemp(futureArray) {
 export function renderFavorite() {
 	addedLocations.innerHTML = "";
 
-	savedCity.forEach((weather, index) => {
+	savedCity.forEach((city, index) => {
 		const favoriteWeather = document.createElement("div");
 		const favoriteCity = document.createElement("div");
 		const deleteButton = document.createElement("button");
@@ -74,10 +71,11 @@ export function renderFavorite() {
 		favoriteWeather.appendChild(favoriteCity);
 		favoriteWeather.appendChild(deleteButton);
 
-		favoriteCity.textContent = weather.city;
+		favoriteCity.textContent = city.city;
 		addedLocations.appendChild(favoriteWeather);
 
 		deleteButton.addEventListener("click", () => {
+			const cityName = favoriteCity.textContent;
 			savedCity.splice(index, 1);
 			renderFavorite();
 			saveToLocalStorageFavorite();
@@ -107,9 +105,7 @@ export function renderFavorite() {
 
 					let futureArray = []
 					const serverUrl = "https://api.openweathermap.org/data/2.5/forecast";
-					const cityLat = data.coord.lat;
-					const cityLon = data.coord.lon;
-					const url = `${serverUrl}?lat=${cityLat}&lon=${cityLon}&appid=${apiKey}&units=metric`;
+					const url = `${serverUrl}?q=${cityName}&appid=${apiKey}&units=metric`;
 					fetch(url)
 						.then((response) => {
 							if (!response.ok) {

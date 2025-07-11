@@ -1,5 +1,5 @@
-import { saveCity } from "./addFavorites.mjs";
 import { savedCity } from "./addFavorites.mjs";
+import { saveCity } from "./addFavorites.mjs";
 import { cityInput } from "./searchCity.mjs";
 
 export function saveToLocalStorageFavorite() {
@@ -11,7 +11,7 @@ export function getFromLocalStorageFavorite() {
 	if (savedFavoriteCities) {
         const savedCities = JSON.parse(savedFavoriteCities)
         savedCities.forEach(element => {
-            saveCity(element.city, element.lat, element.lon)
+            saveCity(element.city)
         })
 	}
 }
