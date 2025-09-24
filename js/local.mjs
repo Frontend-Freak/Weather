@@ -9,23 +9,23 @@ export function saveToLocalStorageFavorite() {
 export function getFromLocalStorageFavorite() {
 	const savedFavoriteCities = localStorage.getItem("savedCity");
 	if (savedFavoriteCities) {
-        const savedCities = JSON.parse(savedFavoriteCities)
-        savedCities.forEach(element => {
-            saveCity(element.city)
-        })
+		const savedCities = JSON.parse(savedFavoriteCities);
+		savedCities.forEach((element) => {
+			saveCity(element.city);
+		});
 	}
 }
 
-export function saveToLocalStorageCurrent(){
-    const foundCity = cityInput.value;
-    localStorage.setItem('lastFoundedCity', foundCity)
+export function saveToLocalStorageCurrent() {
+	const foundCity = cityInput.value;
+	localStorage.setItem("lastFoundedCity", foundCity);
 }
 
-export function getFromLocalStorageCurrent(){
-    const savedCurrentCity = localStorage.getItem('lastFoundedCity')
-    if(savedCurrentCity){
-        return savedCurrentCity
-    } else {
-        return ''
-    }
+export function getFromLocalStorageCurrent() {
+	const savedCurrentCity = localStorage.getItem("lastFoundedCity");
+	if (savedCurrentCity) {
+		return savedCurrentCity;
+	} else {
+		return "";
+	}
 }

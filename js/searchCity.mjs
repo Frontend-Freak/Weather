@@ -11,21 +11,21 @@ export const addToFavoritesBtn = document.getElementById("addToFavoritesBtn");
 export const feelsLike = document.getElementById("feelsLike");
 export const sunrise = document.getElementById("sunrise");
 export const sunset = document.getElementById("sunset");
-export const futureWeather = document.getElementById('futureWeather')
+export const futureWeather = document.getElementById("futureWeather");
 
 export async function searchCity() {
 	const cityName = cityInput.value;
-	const citySavedName = getFromLocalStorageCurrent()
+	const citySavedName = getFromLocalStorageCurrent();
 	const url = `${serverUrl}?q=${citySavedName || cityName}&appid=${apiKey}&units=metric`;
-	try{
-		const response = await fetch(url)
-		if(!response){
-			return 'Страница не найдена'
+	try {
+		const response = await fetch(url);
+		if (!response) {
+			return "Страница не найдена";
 		}
-		const data = await response.json()
+		const data = await response.json();
 		renderMainTemp(data);
 		futureTempFetch();
-	} catch(error){
-		console.error(error)
+	} catch (error) {
+		console.error(error);
 	}
 }

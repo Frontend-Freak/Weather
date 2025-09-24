@@ -1,0 +1,26 @@
+{
+	"name": "weather",
+	"version": "1.0.0",
+	"description": "https://frontend-freak.github.io/Weather/",
+	"homepage": "https://github.com/Frontend-Freak/Weather#readme",
+	"bugs": {
+		"url": "https://github.com/Frontend-Freak/Weather/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Frontend-Freak/Weather.git"
+	},
+	"license": "ISC",
+	"author": "",
+	"type": "module",
+	"main": "main.mjs",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview",
+		"test": "dev"
+	},
+	"dependencies": {
+		"vite": "^7.0.6"
+	}
+}

@@ -7,7 +7,6 @@ export const addFavoritesBtn = document.getElementById("addToFavoritesBtn");
 
 export const savedCity = [];
 
-
 export function saveCity(city) {
 	const weatherObject = {
 		city: city,
@@ -15,25 +14,24 @@ export function saveCity(city) {
 	savedCity.push(weatherObject);
 }
 
-
 export async function addFavorites() {
 	serverUrl;
 	apiKey;
 	const cityName = foundCity.textContent;
 	const url = `${serverUrl}?q=${cityName}&appid=${apiKey}`;
-	
-	try{
-		const response = await fetch(url)
-		if(!response.ok){
-			return 'Страница не найдена'
+
+	try {
+		const response = await fetch(url);
+		if (!response.ok) {
+			return "Страница не найдена";
 		}
-		const data = await response.json()
+		const data = await response.json();
 		foundCity.textContent = data.name;
 		saveCity(foundCity.textContent);
 		renderFavorite();
-		saveToLocalStorageFavorite();			
-		console.log(savedCity)
-	} catch(error){
-		console.error(error)
+		saveToLocalStorageFavorite();
+		console.log(savedCity);
+	} catch (error) {
+		console.error(error);
 	}
 }

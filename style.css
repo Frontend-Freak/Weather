@@ -12,6 +12,7 @@ body {
 	min-height: 383px;
 	background: white;
 	padding: 14px;
+	border-radius: 10px;
 }
 
 #searchString {

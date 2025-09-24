@@ -24,6 +24,8 @@ searchForm.addEventListener("submit", (event) => {
 	cityInput.value = "";
 });
 
+
+
 addFavoritesBtn.addEventListener("click", () => {
 	addFavorites();
 	renderFavorite();
